@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <textarea v-on:input="onTextareaInput" v-model="value"></textarea>
+    <textarea v-if="visible" v-on:input="onTextareaInput" v-model="value"></textarea>
   </div>
 </template>
 
@@ -11,7 +11,8 @@
     export default {
         data() {
             return {
-                value: ""
+                value: "",
+                visible: true
             };
         },
         mounted() {
@@ -22,6 +23,15 @@
 
             EventBus.$on("draw-polyline-deleted", function () {
                 me.clearPolylineInputField();
+            });
+
+            EventBus.$on("tab-index-changed", function (value) {
+                console.log(value)
+                if (value == 1){
+                  me.visible = true
+                } else {
+                  me.visible = false
+                }
             });
         },
         methods: {

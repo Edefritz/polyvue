@@ -1,10 +1,10 @@
 <template>
   <div class="tabs is-centered">
     <ul>
-      <li @click="tabIndex = 1" v-bind:class="{ 'is-active': tabIndex == 1 }">
+      <li @click="setTabIndex(1)" v-bind:class="{ 'is-active': tabIndex == 1 }">
         <a>Polyline</a>
       </li>
-      <li @click="tabIndex = 2" v-bind:class="{ 'is-active': tabIndex == 2 }">
+      <li @click="setTabIndex(2)" v-bind:class="{ 'is-active': tabIndex == 2 }">
         <a>GeoJSON</a>
       </li>
     </ul>
@@ -13,11 +13,19 @@
 
 <script>
 
+import EventBus from "./EventBus";
+
 export default{
   name: "Tabs",
   data() {
     return {
       tabIndex: 1
+    }
+  },
+  methods:{
+    setTabIndex(index){
+      this.tabIndex = index;
+      EventBus.$emit("tab-index-changed", index);
     }
   }
 }

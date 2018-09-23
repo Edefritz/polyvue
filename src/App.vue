@@ -9,7 +9,7 @@
 
 <script>
 
-    import PolylineMap from './components/PolylineMap.vue'
+    import PolylineMap from './components/Map.vue'
     import PolylineText from './components/LeftContainer.vue'
 
 
