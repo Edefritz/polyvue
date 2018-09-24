@@ -20,6 +20,9 @@
             EventBus.$on("text-polyline-changed", function (value) {
                 me.drawPolylineOnMap(value, 5)
             });
+            EventBus.$on("text-geojson-changed", function (value) {
+                me.drawPolylineOnMap(polyline.fromGeoJSON(JSON.parse(value), 5));
+            });
         },
         methods: {
             initMap() {

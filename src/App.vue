@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div class="columns is-marginless is-gapless is-fullheight">
-                <PolylineText></PolylineText>
+                <LeftContainer></LeftContainer>
                 <PolylineMap></PolylineMap>
         </div>
     </div>
@@ -10,8 +10,7 @@
 <script>
 
     import PolylineMap from './components/Map.vue'
-    import PolylineText from './components/LeftContainer.vue'
-
+    import LeftContainer from './components/LeftContainer.vue'
 
     export default {
         name: 'app',
@@ -21,7 +20,7 @@
             }
         },
         components: {
-            PolylineText,
+            LeftContainer,
             PolylineMap
         }
     }

@@ -1,10 +1,10 @@
 <template>
   <div class="tabs is-centered">
     <ul>
-      <li @click="setTabIndex(1)" v-bind:class="{ 'is-active': tabIndex == 1 }">
+      <li @click="setTabIndex(1)" v-bind:class="{ 'is-active': tabIndex === 1 }">
         <a>Polyline</a>
       </li>
-      <li @click="setTabIndex(2)" v-bind:class="{ 'is-active': tabIndex == 2 }">
+      <li @click="setTabIndex(2)" v-bind:class="{ 'is-active': tabIndex === 2 }">
         <a>GeoJSON</a>
       </li>
     </ul>
