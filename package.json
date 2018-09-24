@@ -2,7 +2,7 @@
   "name": "polyly2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "git@github.com:Edefritz/poyly-vue",
+  "homepage": "git@github.com:Edefritz/polyvue",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
