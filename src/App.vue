@@ -14,11 +14,6 @@
 
     export default {
         name: 'app',
-        data: function () {
-            return {
-                count: 0
-            }
-        },
         components: {
             LeftContainer,
             PolylineMap

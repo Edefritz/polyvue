@@ -9,6 +9,7 @@
     import 'leaflet-draw';
     import polyline from '@mapbox/polyline'
     import EventBus from './EventBus';
+    import settings from '../settings';
 
     export default {
         name: "PolylineMap",
@@ -25,23 +26,19 @@
         },
         methods: {
             initMap() {
-                let me = this;
-                let mapboxUrl = "https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}?access_token=";
-                let mapboxAccessToken = "pk.eyJ1IjoiZWRlZnJpdHoiLCJhIjoiVHdNbEFfWSJ9.S7ADvM5VLk5jXNhqWjgsVg";
-                let attribution = '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>'
+                const me = this;
                 this.map = L.map("map").setView([52.5271, 13.4153], 16);
                 this.editableLayers = new L.FeatureGroup().addTo(this.map);
 
                 L.tileLayer(
-                    mapboxUrl + mapboxAccessToken,
+                    settings.baseMapUrl + settings.accessToken,
                     {
                         maxZoom: 18,
-                        attribution: attribution
+                        attribution: settings.baseMapAttribution
                     }
                 ).addTo(this.map);
 
-
-                let options = {
+                new L.Control.Draw({
                     position: 'bottomleft',
                     draw: {
                         polyline: {
@@ -55,10 +52,7 @@
                         marker: false,
                         circlemarker: false
                     }
-                };
-
-                this.drawControl = new L.Control.Draw(options);
-                this.map.addControl(this.drawControl);
+                }).addTo(this.map);
 
                 this.map.on(L.Draw.Event.CREATED, function (e) {
                     EventBus.$emit("draw-polyline-created", e.layer.toGeoJSON());
