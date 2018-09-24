@@ -7,6 +7,9 @@
       <li @click="setTabIndex(2)" v-bind:class="{ 'is-active': tabIndex === 2 }">
         <a>GeoJSON</a>
       </li>
+      <li @click="setTabIndex(3)" v-bind:class="{ 'is-active': tabIndex === 3 }">
+        <a>Help</a>
+      </li>
     </ul>
   </div>
 </template>

@@ -3,12 +3,14 @@
         <Tabs></Tabs>
         <PolylineTextArea v-show="selectedTab === 1"></PolylineTextArea>
         <GeoJsonTextArea v-show="selectedTab === 2"></GeoJsonTextArea>
+        <Info v-show="selectedTab === 3"></Info>
     </div>
 </template>
 
 <script>
     import PolylineTextArea from './PolylineTextArea'
     import GeoJsonTextArea from './GeoJsonTextArea'
+    import Info from './Info'
     import EventBus from "./EventBus";
     import Tabs from './Tabs'
 
@@ -30,7 +32,8 @@
         components: {
             PolylineTextArea,
             GeoJsonTextArea,
-            Tabs
+            Tabs,
+            Info
         }
     };
 </script>
