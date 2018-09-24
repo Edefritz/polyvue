@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div>
         <textarea spellcheck="false" v-on:input="onTextareaInput" v-model="value"></textarea>
     </div>
 </template>

@@ -1,8 +1,8 @@
 <template>
     <div class="column container">
         <Tabs></Tabs>
-        <PolylineTextArea v-show="selectedTab == 1"></PolylineTextArea>
-        <GeoJsonTextArea v-show="selectedTab == 2"></GeoJsonTextArea>
+        <PolylineTextArea v-show="selectedTab === 1"></PolylineTextArea>
+        <GeoJsonTextArea v-show="selectedTab === 2"></GeoJsonTextArea>
     </div>
 </template>
 
@@ -20,17 +20,11 @@
             };
         },
         mounted() {
-            var me = this;
+            let me = this;
             EventBus.$on("tab-index-changed", function (value) {
-                console.log("tab index has changed", value);
                 me.selectedTab = value;
             });
 
-        },
-        methods: {
-            updateSelectedTab: function (value) {
-                this.selectedTab = value;
-            }
         },
         name: "LeftContainer",
         components: {

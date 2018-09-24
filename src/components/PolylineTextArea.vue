@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <textarea spellcheck="false" v-on:input="onTextareaInput" v-model="value"></textarea>
   </div>
 </template>
@@ -31,7 +31,8 @@
         },
         methods: {
             onTextareaInput() {
-                EventBus.$emit("text-polyline-changed", this.value);
+                let withRemovedEscapeCharacters = this.value.replace(/\\\\/g, "\\");
+                EventBus.$emit("text-polyline-changed", withRemovedEscapeCharacters);
             },
             updatePolylineInputField(value) {
                 this.value = polyline.fromGeoJSON(value, 5);

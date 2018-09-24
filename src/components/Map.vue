@@ -1,8 +1,6 @@
 <template>
     <div class="column is-half is-fullheight">
-        <section class="hero is-fullheight">
-            <div id="map" class="hero is-fullheight"></div>
-        </section>
+        <div id="map"></div>
     </div>
 </template>
 
@@ -17,11 +15,12 @@
         mounted() {
             const me = this;
             this.initMap();
-            EventBus.$on("text-polyline-changed", function (value) {
-                me.drawPolylineOnMap(value, 5)
+            EventBus.$on("text-polyline-changed", function (polylineString) {
+                me.drawPolylineOnMap(polylineString)
             });
-            EventBus.$on("text-geojson-changed", function (value) {
-                me.drawPolylineOnMap(polyline.fromGeoJSON(JSON.parse(value), 5));
+            EventBus.$on("text-geojson-changed", function (geojson) {
+                let polylineString = polyline.fromGeoJSON(JSON.parse(geojson), 5);
+                me.drawPolylineOnMap(polylineString);
             });
         },
         methods: {
@@ -67,7 +66,7 @@
                 });
 
                 this.map.on(L.Draw.Event.DRAWSTART, function () {
-                    if (me.editableLayers){
+                    if (me.editableLayers) {
                         me.editableLayers.eachLayer(function (l) {
                             me.editableLayers.removeLayer(l);
                             EventBus.$emit("draw-polyline-deleted", "");
@@ -77,9 +76,8 @@
 
             },
 
-            drawPolylineOnMap(polyline_string, precision) {
-                let string = polyline_string.replace(/\\\\/g, "\\");
-                let latlngs = polyline.decode(string, precision);
+            drawPolylineOnMap(polylineString) {
+                let latlngs = polyline.decode(polylineString);
                 if (this.editableLayers.getLayers().length > 0) {
                     this.editableLayers.getLayers()[0].setLatLngs(latlngs)
                 } else {
@@ -96,10 +94,9 @@
 
 
 <style scoped>
-    /*
-     * Prevent map elements to be selected
-     */
     #map {
+        min-height: 100vh;
+        /* Prevent map elements to be selected */
         user-select: none;
         -ms-user-select: none;
         -moz-user-select: none;
